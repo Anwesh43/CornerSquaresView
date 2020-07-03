@@ -112,4 +112,44 @@ class CornerSquaresView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    data class CSNode(var i : Int, val state : State = State()) {
+
+        private var next : CSNode? = null
+        private var prev : CSNode? = null
+
+        init {
+
+        }
+
+        fun addNeighbor() {
+            if (i < colors.size - 1) {
+                next = CSNode(i + 1)
+                next?.prev = this
+            }
+        }
+
+        fun draw(canvas : Canvas, paint : Paint) {
+            canvas.drawCornerSquare(i, state.scale, paint)
+        }
+
+        fun update(cb : (Float) -> Unit) {
+            state.update(cb)
+        }
+
+        fun startUpdating(cb : () -> Unit) {
+            state.startUpdating(cb)
+        }
+
+        fun getNext(dir : Int, cb : () -> Unit) : CSNode {
+            var curr : CSNode? = prev
+            if (dir == 1) {
+                curr = next
+            }
+            if (curr != null) {
+                return curr
+            }
+            return this
+        }
+    }
 }
