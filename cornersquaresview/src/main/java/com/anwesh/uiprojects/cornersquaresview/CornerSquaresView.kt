@@ -200,4 +200,13 @@ class CornerSquaresView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : CornerSquaresView {
+            val view : CornerSquaresView = CornerSquaresView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }
