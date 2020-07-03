@@ -121,7 +121,7 @@ class CornerSquaresView(ctx : Context) : View(ctx) {
         private var prev : CSNode? = null
 
         init {
-
+            addNeighbor()
         }
 
         fun addNeighbor() {
